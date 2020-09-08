@@ -9,7 +9,6 @@ namespace Books
     public class Storage
     {
         protected static List<Book> books = new List<Book>();
-
         public Storage() { }
     }
 }

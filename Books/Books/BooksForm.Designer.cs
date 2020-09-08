@@ -30,11 +30,11 @@
         {
             this.menu = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.сохрнаитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openButton = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeButton = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.отсортироватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortButton = new System.Windows.Forms.ToolStripMenuItem();
             this.checkPrice = new System.Windows.Forms.CheckBox();
             this.checkPages = new System.Windows.Forms.CheckBox();
             this.checkYear = new System.Windows.Forms.CheckBox();
@@ -58,6 +58,8 @@
             this.listOfFoundBooks = new System.Windows.Forms.ListBox();
             this.course = new System.Windows.Forms.ComboBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.sortGrowButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortWaneButton = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,7 +70,7 @@
             this.файлToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(772, 24);
+            this.menu.Size = new System.Drawing.Size(1283, 24);
             this.menu.TabIndex = 0;
             this.menu.Text = "menuStrip1";
             // 
@@ -76,43 +78,48 @@
             // 
             this.файлToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(118)))), ((int)(((byte)(108)))));
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.сохрнаитьToolStripMenuItem,
+            this.openButton,
             this.toolStripMenuItem1,
-            this.сохранитьToolStripMenuItem,
+            this.closeButton,
             this.toolStripMenuItem2,
-            this.отсортироватьToolStripMenuItem});
+            this.sortButton});
             this.файлToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
-            // сохрнаитьToolStripMenuItem
+            // openButton
             // 
-            this.сохрнаитьToolStripMenuItem.Name = "сохрнаитьToolStripMenuItem";
-            this.сохрнаитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.сохрнаитьToolStripMenuItem.Text = "Открыть";
+            this.openButton.Name = "openButton";
+            this.openButton.Size = new System.Drawing.Size(180, 22);
+            this.openButton.Text = "Открыть";
+            this.openButton.Click += new System.EventHandler(this.openButton_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
             // 
-            // сохранитьToolStripMenuItem
+            // closeButton
             // 
-            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.сохранитьToolStripMenuItem.Text = "Сохранить";
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(180, 22);
+            this.closeButton.Text = "Сохранить";
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
             // 
-            // отсортироватьToolStripMenuItem
+            // sortButton
             // 
-            this.отсортироватьToolStripMenuItem.Name = "отсортироватьToolStripMenuItem";
-            this.отсортироватьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.отсортироватьToolStripMenuItem.Text = "Отсортировать";
+            this.sortButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sortGrowButton,
+            this.sortWaneButton});
+            this.sortButton.Name = "sortButton";
+            this.sortButton.Size = new System.Drawing.Size(180, 22);
+            this.sortButton.Text = "Отсортировать";
             // 
             // checkPrice
             // 
@@ -295,14 +302,14 @@
             this.listOfCurrentBooks.FormattingEnabled = true;
             this.listOfCurrentBooks.Location = new System.Drawing.Point(315, 56);
             this.listOfCurrentBooks.Name = "listOfCurrentBooks";
-            this.listOfCurrentBooks.Size = new System.Drawing.Size(197, 290);
+            this.listOfCurrentBooks.Size = new System.Drawing.Size(442, 290);
             this.listOfCurrentBooks.TabIndex = 66;
             // 
             // labelCurrentBooks
             // 
             this.labelCurrentBooks.AutoSize = true;
             this.labelCurrentBooks.ForeColor = System.Drawing.Color.White;
-            this.labelCurrentBooks.Location = new System.Drawing.Point(349, 39);
+            this.labelCurrentBooks.Location = new System.Drawing.Point(464, 39);
             this.labelCurrentBooks.Name = "labelCurrentBooks";
             this.labelCurrentBooks.Size = new System.Drawing.Size(117, 13);
             this.labelCurrentBooks.TabIndex = 67;
@@ -312,7 +319,7 @@
             // 
             this.labelFoundBooks.AutoSize = true;
             this.labelFoundBooks.ForeColor = System.Drawing.Color.White;
-            this.labelFoundBooks.Location = new System.Drawing.Point(583, 39);
+            this.labelFoundBooks.Location = new System.Drawing.Point(968, 39);
             this.labelFoundBooks.Name = "labelFoundBooks";
             this.labelFoundBooks.Size = new System.Drawing.Size(128, 13);
             this.labelFoundBooks.TabIndex = 69;
@@ -321,9 +328,9 @@
             // listOfFoundBooks
             // 
             this.listOfFoundBooks.FormattingEnabled = true;
-            this.listOfFoundBooks.Location = new System.Drawing.Point(546, 56);
+            this.listOfFoundBooks.Location = new System.Drawing.Point(791, 56);
             this.listOfFoundBooks.Name = "listOfFoundBooks";
-            this.listOfFoundBooks.Size = new System.Drawing.Size(197, 290);
+            this.listOfFoundBooks.Size = new System.Drawing.Size(460, 290);
             this.listOfFoundBooks.TabIndex = 68;
             // 
             // course
@@ -340,13 +347,27 @@
             this.course.Sorted = true;
             this.course.TabIndex = 70;
             // 
+            // sortGrowButton
+            // 
+            this.sortGrowButton.Name = "sortGrowButton";
+            this.sortGrowButton.Size = new System.Drawing.Size(180, 22);
+            this.sortGrowButton.Text = "По возрастанию";
+            this.sortGrowButton.Click += new System.EventHandler(this.sortGrowButton_Click);
+            // 
+            // sortWaneButton
+            // 
+            this.sortWaneButton.Name = "sortWaneButton";
+            this.sortWaneButton.Size = new System.Drawing.Size(180, 22);
+            this.sortWaneButton.Text = "По убыванию";
+            this.sortWaneButton.Click += new System.EventHandler(this.sortWaneButton_Click);
+            // 
             // BooksForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(10)))), ((int)(((byte)(37)))));
-            this.ClientSize = new System.Drawing.Size(772, 370);
+            this.ClientSize = new System.Drawing.Size(1283, 370);
             this.Controls.Add(this.course);
             this.Controls.Add(this.labelFoundBooks);
             this.Controls.Add(this.listOfFoundBooks);
@@ -384,8 +405,8 @@
 
         private System.Windows.Forms.MenuStrip menu;
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem сохрнаитьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openButton;
+        private System.Windows.Forms.ToolStripMenuItem closeButton;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.CheckBox checkPrice;
         private System.Windows.Forms.CheckBox checkPages;
@@ -409,9 +430,11 @@
         private System.Windows.Forms.Label labelFoundBooks;
         private System.Windows.Forms.ListBox listOfFoundBooks;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem отсортироватьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sortButton;
         private System.Windows.Forms.ComboBox course;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ToolStripMenuItem sortGrowButton;
+        private System.Windows.Forms.ToolStripMenuItem sortWaneButton;
     }
 }
 

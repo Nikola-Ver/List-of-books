@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Books
 {
-    public class Book
+    public class Book : IEquatable<Book>
     {
         public string Isbn { get; set; }
         public string Author { get; set; }
@@ -14,7 +14,7 @@ namespace Books
         public string Edition { get; set; }
         public int Year { get; set; }
         public int Pages { get; set; }
-        public int Price { get; set; } // in $
+        public int Price { get; set; }
 
         public Book()
         {
@@ -43,9 +43,27 @@ namespace Books
             return this.Isbn == isbn;
         }
 
-        public bool CompareBooks(Book book)
+        public override string ToString()
         {
+            return this.Isbn + " " + this.Author + " " + this.Name +
+                " " + this.Edition + " " + this.Year.ToString() + " года " + this.Pages.ToString()
+                + " стр. " + this.Price.ToString() + " копеек";
+        }
+
+        public int CompareTo(Book book)
+        {
+            return this.Isbn.CompareTo(book.Isbn);    
+        }
+
+        public override bool Equals(object obj)
+        {
+            Book book = obj as Book;
             if (book == null) return false;
+            return Equals(book);
+        }
+
+        public bool Equals(Book book)
+        {
             return this.Isbn == book.Isbn && this.Author == book.Author && this.Name == book.Name
                    && this.Edition == book.Edition && this.Year == book.Year && this.Pages == book.Pages && this.Price == book.Price;
         }

@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SortComparer.cs" />
     <Compile Include="Storage.cs" />
     <Compile Include="StorageService.cs" />
     <EmbeddedResource Include="BooksForm.resx">

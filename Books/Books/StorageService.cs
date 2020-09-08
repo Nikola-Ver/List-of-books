@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Books
 {
@@ -11,6 +12,52 @@ namespace Books
 
         public StorageService() { }
 
+        private void Write(BinaryWriter bw, Book book)
+        {
+            bw.Write(book.Isbn);
+            bw.Write(book.Author);
+            bw.Write(book.Name);
+            bw.Write(book.Edition);
+            bw.Write(book.Year);
+            bw.Write(book.Pages);
+            bw.Write(book.Price);
+        }
+
+        private Book Read(BinaryReader br)
+        {
+            string isbn = br.ReadString();
+            string author = br.ReadString();
+            string name = br.ReadString();
+            string edition = br.ReadString();
+            int year = br.ReadInt32();
+            int pages = br.ReadInt32();
+            int price = br.ReadInt32();
+            return new Book(isbn, author, name, edition, year, pages, price);
+        }
+
+        public void Serlization()
+        {
+            using (BinaryWriter bw = new BinaryWriter(File.Open("books.dat", FileMode.Create, FileAccess.Write, FileShare.None)))
+            {
+                books.ForEach(e =>
+                {
+                    Write(bw, e);
+                }); 
+            }
+        }
+
+        public void Deserialization()
+        {
+            using (BinaryReader br = new BinaryReader(File.Open("books.dat", FileMode.OpenOrCreate, FileAccess.Read, FileShare.Read)))
+            {
+                books.Clear();
+                while(br.BaseStream.Position != br.BaseStream.Length)
+                {
+                    books.Add(Read(br));
+                }
+            }
+        }
+
         public List<Book> GetList()
         {
             return books;
@@ -18,7 +65,8 @@ namespace Books
 
         public void Add(Book book)
         {
-            books.Add(book);
+            if (books.Find(e => e.Isbn.CompareTo(book.Isbn) == 0) == null)
+                books.Add(book);
         }
 
         public List<Book> Find(bool[] variant, Book value)
@@ -43,7 +91,7 @@ namespace Books
 
         public bool Remove(Book book)
         {
-            int index = books.FindIndex(e => e.CompareBooks(book));
+            int index = books.FindIndex(e => e.Equals(book));
             if (index > -1)
             {
                 books.RemoveAt(index);
